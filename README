@@ -1,0 +1,36 @@
+                                                                            
+*Helena Khalilieh 
+
+*HTTP Proxy –phase1- 
+
+*proxy.c:the main and the code it self that does all the work 
+
+*How to compile the code in the terminal :gcc -Wall -g -c proxy1.c
+                                          gcc -Wall -g -o proxy1 proxy1.o
+*Execute the proxy server: ./proxy1 <URL> http://www.example.com/folder/folder/file
+                                           
+    
+*The program we write will work as follows:An HTTP Proxy that gets requests from the user and check if the requested file appears in its DB, if yes, 
+the file is provided from the local filesystem, otherwise, it constructs an HTTP request based on user’s 
+command line input, sends the request to a Web server, receives the reply from the server, saves the 
+file locally and displays the reply message on screen.
+
+*Issues with test script
+[-] valgrind found memory leaks, check your code for allocation/freeing errors.
+  There are no leaks in the code. All issues are in _dl_open(), which a memcheck bug
+
+[-] Test with args: http://neverssl.com/index.html failed.Please check stdout_res_from_server.txt
+[-] 200OK status has not been found.
+  This test requires reply with HTTP/1.1, but PDF says to use HTTP/1.0, which we do
+
+[-] Test with args: http://asnt.org:8080/Test.html failed.Please check stdout_res_from_server_v2.txt
+Error:
+[-] 200OK status has not been found.
+  This test requires reply with HTTP/1.1, but PDF says to use HTTP/1.0, which we do
+
+[-] File content is incorrect.
+  The document is moved, to https, and that is not supported in proxy1.
+
+[-] Test with args: http://neverssl.com/index.html failed. Please check stdout_res_from_filesystem.txt
+  The headers in expected/response_from_filesystem.txt are not printed, as described in PDF.
+
